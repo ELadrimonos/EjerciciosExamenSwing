@@ -12,8 +12,16 @@ public class VentanaRGB extends JFrame {
     public Color colorActual;
 
     VentanaRGB() {
+        // Cuando inicialicemos una ventana RGB ocurrirá lo siguiente:
+
+        /* Añadimos al contenido de la ventana el panel principal que hemos hecho en el diseñador,
+        lo que hayamos hecho será agregado al panel automaticamente gracias al .form
+         */
         this.setContentPane(mainPanel);
+        // Queremos que tenga un tamaño fijo
         this.setSize(500,200);
+        this.setResizable(false);
+        // Cuando instanciemos un objeto no queremos que sea visible
         this.setVisible(false);
         this.setTitle("Personalizar color");
         testColor.setBackground(new Color(rojo.getValue(), verde.getValue(), azul.getValue()));
@@ -31,6 +39,7 @@ public class VentanaRGB extends JFrame {
         azul.addChangeListener(cambioValor);
     }
 
+    // Solo sirve para referenciar el botón de enviar desde MultiFuncion
     public JButton getEnviarButton(){return enviarButton;}
 }
 

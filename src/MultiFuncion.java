@@ -35,11 +35,11 @@ public class MultiFuncion extends JFrame implements ActionListener {
 
     // Lo he hecho final porque no voy a volver a inicializarlo y se va a quedar tal y como está
     private final VentanaRGB rgb;
-
+    // Aquí tenemos el tamaño de la fuente y el nombre
     private int tamany;
     private String nombreFuente;
 
-
+    // Con este HashMap asociamos un String con un Color
     static HashMap<String, Color> mapaColores = new HashMap<>(){{
         put("Azul", Color.BLUE);
         put("Rojo", Color.RED);
@@ -55,23 +55,28 @@ public class MultiFuncion extends JFrame implements ActionListener {
     setVisible(true);
     setResizable(false);
     setTitle("Multi Función");
+    // Cuando cerremos esta ventana queremos que el programa acabe
     setDefaultCloseOperation(EXIT_ON_CLOSE);
+    // Instanciamos la ventana RGB
     rgb = new VentanaRGB();
 
-    // Dejamos los valores que están por defecto en la fuente referenciados aquí
+    // Dejamos los valores que están por defecto dde la fuente en el form
     tamany = 10;
     nombreFuente = "Purisa";
 
-    // Agregamos el objeto MultiFuncion como ActionListener
+    // Agregamos el objeto MultiFuncion (este) como ActionListener al botón enviar de la ventana RGB
     rgb.getEnviarButton().addActionListener(this);
 
-
+    // Cambia los colores del panel y de la etiqueta test
      ActionListener cambioColorListener = actionEvent -> {
        AbstractButton botonActual = (AbstractButton) actionEvent.getSource();
        Lamina12.setBackground(mapaColores.get(botonActual.getText()));
        testLabel.setForeground(mapaColores.get(botonActual.getText()));
      };
 
+     /* Cambia el tipo de fuente y su tamaño dependiendo de si el botón que se acaba de pulsar entre los que estén
+     asociados a este listener sea un dígito o no
+     */
      ActionListener cambioFuente = actionEvent -> {
        AbstractButton botonActual = (AbstractButton) actionEvent.getSource();
         // Vemos si la opción que acabamos de elegir es un número lo asignamos al tamaño, si no será el nombre de la fuente
@@ -93,11 +98,13 @@ public class MultiFuncion extends JFrame implements ActionListener {
      orangeButton.addActionListener(cambioColorListener);
      brownButton.addActionListener(cambioColorListener);
 
+     // A los botones de tipo de fuente agregamos el evento de cambio fuente
      serifRadioButton.addActionListener(cambioFuente);
      comicSansRadioButton.addActionListener(cambioFuente);
      purisaRadioButton.addActionListener(cambioFuente);
      broadwayRadioButton.addActionListener(cambioFuente);
 
+     // A los botones de tamaño de fuente agregamos el evento de cambio fuente
      a5RadioButton.addActionListener(cambioFuente);
      a10RadioButton.addActionListener(cambioFuente);
      a15RadioButton.addActionListener(cambioFuente);
@@ -105,6 +112,9 @@ public class MultiFuncion extends JFrame implements ActionListener {
      a30RadioButton.addActionListener(cambioFuente);
      a50RadioButton.addActionListener(cambioFuente);
 
+     /* Cuando le demos al botón de personalizar color solo haremos que la ventana RGB sea visible, podriamos instanciar
+      una nueva ventana y hacerla visible aquí para que se reinicien los valores
+      */
      personalizarButton.addActionListener(actionEvent -> rgb.setVisible(true));
     }
 
@@ -115,7 +125,7 @@ public class MultiFuncion extends JFrame implements ActionListener {
     }
 
     // Nuestra clase implementa la interfaz de ActionListener, por lo que podemos hacer que cuando otra clase use esta
-    // clase como ActionListener haga este bloque de código
+    // clase como ActionListener haga este bloque de código en esta clase
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Lamina12.setBackground(rgb.colorActual);
