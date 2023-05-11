@@ -41,5 +41,9 @@ public class VentanaRGB extends JFrame {
 
     // Solo sirve para referenciar el botón de enviar desde MultiFuncion
     public JButton getEnviarButton(){return enviarButton;}
+
+    public JSlider getRojo(){return rojo;}
+    public JSlider getVerde(){return verde;}
+    public JSlider getAzul(){return azul;}
 }
 
