@@ -14,4 +14,8 @@ public class Mensaje extends JPanel {
         this.setSize(100,100);
         this.usuarioOrigen.setText(origen + " - " +  formatter.format(fecha));
     }
+
+    public JLabel getUsuarioOrigen() {
+        return usuarioOrigen;
+    }
 }

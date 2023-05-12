@@ -13,6 +13,8 @@ public class Chat extends JFrame implements ActionListener {
     private final String esteUsuario;
     private int numMensajes = 0;
 
+    private static Chat ultimoMensaje;
+
     Chat(String usuario){
         this.esteUsuario = usuario;
         this.setContentPane(mainPanel);
@@ -51,6 +53,12 @@ public class Chat extends JFrame implements ActionListener {
         if (mensaje.equals("")){return;}
 
         Mensaje mensajeRemoto = new Mensaje(mensaje, this.esteUsuario);
+
+        if (ultimoMensaje == this){
+            mensajeRemoto.getUsuarioOrigen().setVisible(false);
+        }
+
+
         GridBagConstraints otro = new GridBagConstraints();
         otro.gridx = 1;
         otro.gridy = numMensajes;
@@ -58,6 +66,11 @@ public class Chat extends JFrame implements ActionListener {
         otroChat.mensajes.revalidate();
 
         Mensaje mensajeLocal = new Mensaje(mensaje, this.esteUsuario);
+
+        if (ultimoMensaje == this){
+            mensajeLocal.getUsuarioOrigen().setVisible(false);
+        }
+
         GridBagConstraints propio = new GridBagConstraints();
         propio.anchor = GridBagConstraints.EAST;
         propio.gridx = 2;
@@ -68,5 +81,6 @@ public class Chat extends JFrame implements ActionListener {
         numMensajes++;
         otroChat.numMensajes++;
         this.inputMensaje.setText("");
+        ultimoMensaje = this;
     }
 }
