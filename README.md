@@ -8,5 +8,6 @@ Vienen tres programas:
 - TemperaturaReactor.java
 - MultiFuncion.java (el cual emplea VentanaRGB.java)
 - MultiEvento.java (que emplea VentanaRGB y CambiarTexto.java)
+- Chat.java (emplea Mensaje.java)
 
 Consultar comentarios y los formularios para entender mejor el funcionamiento.
