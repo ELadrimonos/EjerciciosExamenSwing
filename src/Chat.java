@@ -14,7 +14,7 @@ public class Chat extends JFrame implements ActionListener {
     private int numMensajes = 0;
 
     private static Chat ultimoMensaje;
-
+    // Creamos un chat con el nombre de usuario
     Chat(String usuario){
         this.esteUsuario = usuario;
         this.setContentPane(mainPanel);
@@ -24,10 +24,9 @@ public class Chat extends JFrame implements ActionListener {
         this.setTitle("Ventana de " + esteUsuario);
         this.setLocation(300, 300);
         botonEnviar.addActionListener(this);
-        GridBagConstraints c = new GridBagConstraints();
 
     }
-
+    // Una vez hayamos creado un cat, creamos otro pasando el chat ya creado para vincularlos
     Chat(String usuario, Chat otroChat){
         this(usuario);
         this.otroChat = otroChat;
@@ -49,17 +48,20 @@ public class Chat extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String mensaje = this.inputMensaje.getText();
-
+        // Si no hay texto en el mensaje entonces detiene el método
         if (mensaje.equals("")){return;}
 
+        // Por añguna razón si gasto el mismo objeto Mensaje en ambos Chats solo aparecerá en una ventana
         Mensaje mensajeRemoto = new Mensaje(mensaje, this.esteUsuario);
 
         if (ultimoMensaje == this){
+            // Si el último mensaje es de este usuario entonces en el mensaje remoto no aparecerá el nombre (mensajes concadenados)
             mensajeRemoto.getUsuarioOrigen().setVisible(false);
         }
 
 
         GridBagConstraints otro = new GridBagConstraints();
+        // Si el mensaje es ajeno aparece a la izquierda (primera columna)
         otro.gridx = 1;
         otro.gridy = numMensajes;
         otroChat.mensajes.add(mensajeRemoto, otro);
@@ -72,7 +74,7 @@ public class Chat extends JFrame implements ActionListener {
         }
 
         GridBagConstraints propio = new GridBagConstraints();
-        propio.anchor = GridBagConstraints.EAST;
+        // Si el mensaje es propio que aparezca a la derecha (segunda columna)
         propio.gridx = 2;
         propio.gridy = numMensajes;
 
@@ -81,6 +83,7 @@ public class Chat extends JFrame implements ActionListener {
         numMensajes++;
         otroChat.numMensajes++;
         this.inputMensaje.setText("");
+        // El último emisor del chat será el último que ha mandado un mensaje
         ultimoMensaje = this;
     }
 }
