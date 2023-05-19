@@ -1,6 +1,10 @@
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.util.Locale;
 
 public class VentanaRGB extends JFrame {
     private JSlider rojo;
@@ -19,7 +23,7 @@ public class VentanaRGB extends JFrame {
          */
         this.setContentPane(mainPanel);
         // Queremos que tenga un tamaño fijo
-        this.setSize(500,200);
+        this.setSize(500, 200);
         this.setResizable(false);
         // Cuando instanciemos un objeto no queremos que sea visible
         this.setVisible(false);
@@ -40,10 +44,21 @@ public class VentanaRGB extends JFrame {
     }
 
     // Solo sirve para referenciar el botón de enviar desde MultiFuncion
-    public JButton getEnviarButton(){return enviarButton;}
+    public JButton getEnviarButton() {
+        return enviarButton;
+    }
 
-    public JSlider getRojo(){return rojo;}
-    public JSlider getVerde(){return verde;}
-    public JSlider getAzul(){return azul;}
+    public JSlider getRojo() {
+        return rojo;
+    }
+
+    public JSlider getVerde() {
+        return verde;
+    }
+
+    public JSlider getAzul() {
+        return azul;
+    }
+
 }
 

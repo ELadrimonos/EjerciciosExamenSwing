@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,20 +15,22 @@ public class Chat extends JFrame implements ActionListener {
     private int numMensajes = 0;
 
     private static Chat ultimoMensaje;
+
     // Creamos un chat con el nombre de usuario
-    Chat(String usuario){
+    Chat(String usuario) {
         this.esteUsuario = usuario;
         this.setContentPane(mainPanel);
         this.setVisible(true);
-        this.setSize(300,600);
+        this.setSize(300, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Ventana de " + esteUsuario);
         this.setLocation(300, 300);
         botonEnviar.addActionListener(this);
 
     }
+
     // Una vez hayamos creado un cat, creamos otro pasando el chat ya creado para vincularlos
-    Chat(String usuario, Chat otroChat){
+    Chat(String usuario, Chat otroChat) {
         this(usuario);
         this.otroChat = otroChat;
         otroChat.otroChat = this;
@@ -35,7 +38,8 @@ public class Chat extends JFrame implements ActionListener {
         otroChat.otroUsuario.setText(this.esteUsuario + " - En línea");
         this.setLocation(700, 300);
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         Chat chat1 = new Chat("Adrián");
         Chat chat2 = new Chat("David", chat1);
 
@@ -49,12 +53,14 @@ public class Chat extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         String mensaje = this.inputMensaje.getText();
         // Si no hay texto en el mensaje entonces detiene el método
-        if (mensaje.equals("")){return;}
+        if (mensaje.equals("")) {
+            return;
+        }
 
         // Por añguna razón si gasto el mismo objeto Mensaje en ambos Chats solo aparecerá en una ventana
         Mensaje mensajeRemoto = new Mensaje(mensaje, this.esteUsuario);
 
-        if (ultimoMensaje == this){
+        if (ultimoMensaje == this) {
             // Si el último mensaje es de este usuario entonces en el mensaje remoto no aparecerá el nombre (mensajes concadenados)
             mensajeRemoto.getUsuarioOrigen().setVisible(false);
         }
@@ -69,7 +75,7 @@ public class Chat extends JFrame implements ActionListener {
 
         Mensaje mensajeLocal = new Mensaje(mensaje, this.esteUsuario);
 
-        if (ultimoMensaje == this){
+        if (ultimoMensaje == this) {
             mensajeLocal.getUsuarioOrigen().setVisible(false);
         }
 
@@ -86,4 +92,5 @@ public class Chat extends JFrame implements ActionListener {
         // El último emisor del chat será el último que ha mandado un mensaje
         ultimoMensaje = this;
     }
+
 }

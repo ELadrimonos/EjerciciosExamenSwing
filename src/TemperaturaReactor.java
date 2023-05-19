@@ -1,5 +1,8 @@
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.util.Locale;
 // Importo estáticamente el método showMessageDialog
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -10,9 +13,9 @@ public class TemperaturaReactor extends JFrame {
     private JPanel mainPanel;
     private JLabel estado;
 
-    public TemperaturaReactor(){
+    public TemperaturaReactor() {
         this.setContentPane(mainPanel);
-        this.setSize(600,300);
+        this.setSize(600, 300);
         this.setTitle("Temperatura Reactor");
         this.setResizable(false);
         this.setVisible(true);
@@ -42,17 +45,17 @@ public class TemperaturaReactor extends JFrame {
         JFrame ventana = new TemperaturaReactor();
     }
 
-    int valorValido(String valor){
+    int valorValido(String valor) {
         int numero;
-        try{
+        try {
             // Si el valor introducido es un dígito pasará a las condiciones if
             numero = Integer.parseInt(valor);
-        } catch (NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             // Si tiene un caracter no válido saltará un diálogo con un mensaje y devolverá el valor que había previamente
             showMessageDialog(null, "Error: No es un digito\n" + nfe);
             return this.sliderTemp.getValue();
         }
-        if (numero >= 0 && numero <= 3000){
+        if (numero >= 0 && numero <= 3000) {
             // Si el número está entre 0 y 3000 devolverá el valor pasado
             return numero;
         } else {
@@ -62,14 +65,14 @@ public class TemperaturaReactor extends JFrame {
         }
     }
 
-    void cambiarEstado(){
+    void cambiarEstado() {
         // Asignamos a valor el valor del slider
         int valor = sliderTemp.getValue();
-        if (valor >= 0 && valor <= 1000){
+        if (valor >= 0 && valor <= 1000) {
             // Si el valor está entre 0 y 1000 el texto dirá estable y será de color verde
             estado.setText("ESTABLE");
             estado.setForeground(Color.GREEN);
-        } else if (valor > 1000 && valor <= 1500){
+        } else if (valor > 1000 && valor <= 1500) {
             // Si está entre 1001 y 1500 dirá precaución y en color amarillo
             estado.setText("PRECAUCIÓN");
             estado.setForeground(Color.YELLOW);
